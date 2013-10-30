@@ -16,7 +16,6 @@
 		5B954ACF18214946009EA7C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B954ACE18214946009EA7C4 /* Foundation.framework */; };
 		5B954AD118214946009EA7C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B954AD018214946009EA7C4 /* CoreGraphics.framework */; };
 		5B954AD318214946009EA7C4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B954AD218214946009EA7C4 /* CoreText.framework */; };
-		5B954AD518214946009EA7C4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B954AD418214946009EA7C4 /* GameKit.framework */; };
 		5B954AD918214946009EA7C4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B954AD818214946009EA7C4 /* Default.png */; };
 		5B954ADB18214946009EA7C4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B954ADA18214946009EA7C4 /* Default@2x.png */; };
 		5B954ADD18214946009EA7C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B954ADC18214946009EA7C4 /* Default-568h@2x.png */; };
@@ -154,7 +153,6 @@
 		5B954ACE18214946009EA7C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5B954AD018214946009EA7C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5B954AD218214946009EA7C4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		5B954AD418214946009EA7C4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		5B954AD818214946009EA7C4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		5B954ADA18214946009EA7C4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		5B954ADC18214946009EA7C4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -441,7 +439,6 @@
 				5B954AC518214946009EA7C4 /* OpenGLES.framework in Frameworks */,
 				5B954ACF18214946009EA7C4 /* Foundation.framework in Frameworks */,
 				5B954AC918214946009EA7C4 /* AudioToolbox.framework in Frameworks */,
-				5B954AD518214946009EA7C4 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +474,6 @@
 				5B954ACE18214946009EA7C4 /* Foundation.framework */,
 				5B954AD018214946009EA7C4 /* CoreGraphics.framework */,
 				5B954AD218214946009EA7C4 /* CoreText.framework */,
-				5B954AD418214946009EA7C4 /* GameKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

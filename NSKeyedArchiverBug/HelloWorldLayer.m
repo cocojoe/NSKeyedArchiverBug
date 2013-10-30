@@ -13,6 +13,40 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
+#pragma mark Simple Object / NSCoding
+@implementation SimpleAsset
+
+-(id)init
+{
+	if((self = [super init])){
+        _counter = 0;
+	}
+	
+	return self;
+}
+
+-(id) initWithCoder:(NSCoder *) aDecoder {
+	
+	self = [super init];
+	if(self != nil) {
+		self.counter = [aDecoder decodeIntForKey:@"counter"];
+        
+	}
+	return self;
+}
+
+-(void) encodeWithCoder:(NSCoder *)aCoder {
+    
+	[aCoder encodeInt:self.counter forKey:@"counter"];
+    
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"counter: %d",self.counter];
+}
+
+@end
+
 #pragma mark - HelloWorldLayer
 
 // HelloWorldLayer implementation
@@ -42,7 +76,7 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"NSKeyedArchiverBug" fontName:@"Marker Felt" fontSize:32];
 
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -54,11 +88,6 @@
 		[self addChild: label];
 		
 		
-		
-		//
-		// Leaderboards and Achievements
-		//
-		
 		// Default font size will be 28 points.
 		[CCMenuItemFont setFontSize:28];
 		
@@ -66,35 +95,16 @@
 		__block id copy_self = self;
 		
 		// Achievement Menu Item using blocks
-		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-			
-			
-			GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-			achivementViewController.achievementDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:achivementViewController animated:YES];
-			
-			[achivementViewController release];
-		}];
+		CCMenuItem *itemBug = [CCMenuItemFont itemWithString:@"Start Test" block:^(id sender) {
+            
+            [copy_self archiveTest:16];
+			[copy_self archiveTest:32];
+            [copy_self archiveTest:64];
+            [copy_self archiveTest:128];
+        }];
 		
-		// Leaderboard Menu Item using blocks
-		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-			
-			
-			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-			leaderboardViewController.leaderboardDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-			
-			[leaderboardViewController release];
-		}];
-
 		
-		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
+		CCMenu *menu = [CCMenu menuWithItems:itemBug, nil];
 		
 		[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
@@ -104,6 +114,36 @@
 
 	}
 	return self;
+}
+
+-(void) archiveTest:(int) count {
+    
+    CCLOG(@"[archiveTest] Started");
+    
+    NSInteger entries = count;
+    NSMutableArray* saveData = [[NSMutableArray alloc] init];
+    
+    CCLOG(@"[archiveTest] Populating Array");
+    
+    for(int i=0;i<entries;i++) {
+        SimpleAsset* newAsset = [[SimpleAsset alloc] init];
+        [newAsset setCounter:i];
+        [saveData addObject:newAsset];
+    }
+    
+    CCLOG(@"[archiveTest] Populated Array Count: %d",[saveData count]);
+    
+    // Output Array
+    for(id object in saveData) {
+        CCLOG(@"%@",object);
+    }
+    
+    // Convert Array -> Data (This bit that breaks)
+    CCLOG(@"[archiveTest] Archiving Array");
+    NSData *data       = [NSKeyedArchiver archivedDataWithRootObject:saveData];
+    
+    CCLOG(@"[archiveTest] Completed");
+    
 }
 
 // on "dealloc" you need to release all your retained objects
@@ -117,17 +157,4 @@
 	[super dealloc];
 }
 
-#pragma mark GameKit delegate
-
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
-{
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
-}
-
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
-}
 @end
